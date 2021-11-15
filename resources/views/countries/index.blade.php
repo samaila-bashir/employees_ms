@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Users')
+@section('title', 'Countries')
 
 @section('content')
     <div class="row">
@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <form action="{{ route('users.index') }}" method="GET">
+                            <form action="{{ route('countries.index') }}" method="GET">
                                 <div class="form-row align-items-center">
                                     <div class="col">
                                         <input type="search" name="search" class="form-control mb-2">
@@ -30,26 +30,33 @@
                             </form>
                         </div>
                         <div>
-                            <a href="{{ route('users.create') }}" class="float-right">Create User</a>
+                            <a href="{{ route('countries.create') }}" class="float-right">Add Country</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <table class="table">
                         <thead>
-                            <th>Full Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
+                            <th>Country Code</th>
+                            <th>Name</th>
                             <th>Manage</th>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($countries as $country)
                             <tr>
-                                <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
+                                <td>{{ $country->country_code }}</td>
+                                <td>{{ $country->name }}</td>
                                 <td>
-                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                                    <div class="btn-group">
+                                        <a href="{{ route('countries.edit', $country->id) }}" class="btn btn-primary">Edit</a> &nbsp;&nbsp;
+
+                                        <form method="POST" action="{{ route('countries.destroy', $country->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                            
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
