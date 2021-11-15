@@ -16,7 +16,23 @@
                 </div>
 
                 <div class="card-header">
-                    <a href="{{ route('users.create') }}" class="float-right">Create User</a>
+                    <div class="row">
+                        <div class="col">
+                            <form action="{{ route('users.index') }}" method="GET">
+                                <div class="form-row align-items-center">
+                                    <div class="col">
+                                        <input type="search" name="search" class="form-control mb-2">
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary mb-2">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div>
+                            <a href="{{ route('users.create') }}" class="float-right">Create User</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table">
